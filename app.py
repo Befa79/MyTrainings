@@ -20,7 +20,7 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_exercices")
 def get_exercices():
-    exercices = mongo.db.exercices.find()
+    exercices = list(mongo.db.exercices.find())
     return render_template("exercices.html", exercices=exercices)
 
 
