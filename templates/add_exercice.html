@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="indigo-text text-darken-2 center-align">Add Exercice</h3>
+
+
+    <div class="row card-panel grey lighten-5">
+        <form class="col s12" method="POST" action="">
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fa-solid fa-file-code align-left prefix indigo-text text-darken-2"></i>
+                    <select id="program_name" name="program_name">
+                        <option value="name="program_name"" disabled selected>Program Name</option>
+                        {% for program in programs %}
+                        <option value="{{ program.program_name}}">{{ program.program_name}}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="program_name">Program</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-pencil-alt prefix indigo-text text-darken-2"></i>
+                    <input id="icon_prefix" type="text" class="validate" required>
+                    <label for="exercice_name">Exercice Name</label> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fa solid fa-link align-left prefix indigo-text text-darken-2"></i>
+                    <input id="exercice_link" name="exercice_link"  type="url" class="validate" required></input>
+                    <label for="exercice_link">Exercice Link</label>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

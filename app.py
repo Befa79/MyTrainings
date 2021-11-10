@@ -97,6 +97,12 @@ def logout():
     return redirect(url_for("login"))
 
 
+@app.route("/add_exercice")
+def add_exercice():
+    programs = mongo.db.programs.find().sort("program_name", 1)
+    return render_template("add_exercice.html", programs=programs)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

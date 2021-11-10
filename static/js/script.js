@@ -8,6 +8,7 @@
 $(document).ready(function () {
     $(".sidenav").sidenav({edge: "right"});
     $(".collapsible").collapsible();
+    $('select').formSelect();
 });
 
 
@@ -21,3 +22,4 @@ $(document).ready(function () {
 //     let collapsibles = document.querySelectorAll(".collapsible");
 //     let collapsiblesInstance = M.Collapsible.init(collapsibles);
 // });
+
