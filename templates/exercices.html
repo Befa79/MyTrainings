@@ -1,36 +1,50 @@
 {% extends "base.html" %}
 {% block content %}
 
-<ul class="collapsible">
+  <h3 class="Indigo-text text-darken-2 center-align">Exercices</h3>
   {% for exercice in exercices %}
-  <li>
-    <div class="collapsible-header indigo-text text-darken-2"><i class="fa-solid fa-dumbbell indigo-text text-darken-2"></i><strong>{{ exercice.exercice_name}}</strong></div>
-    <div class="collapsible-body"><span>{{ exercice.exercice_link}}</span></div>
-  </li>
-  <li>
-    <div class="collapsible-header indigo-text text-darken-2"><i class="fa-solid fa-file-code indigo-text text-darken-2"></i><strong>{{ exercice.program_name}}</strong></div>
-  </li>
-  <li>
-    <div class="collapsible-header indigo-text text-darken-2">
-      {% if exercice.is_done == "no" %}
-      <i class="fa-solid fa-rectangle-list red-text text-lighten-3"></i>
-      <strong>NOT YET DONE</strong>
-      {% else %}
-      <i class="fa-solid fa-square-check teal-text text-lighten-2"></i>
-      <strong>DONE</strong>
-      {% endif %}
-    </div>
-  </li>
-
+  <div class="row">
+      <ul class="col s8 offset-s2">
+        <li>
+          <div class="indigo-text text-darken-2">
+            <i class="fa-solid fa-dumbbell indigo-text text-darken-2"></i>
+            <a href="{{ exercice.exercice_link}}" target="_blank"><strong>{{ exercice.exercice_name}}</strong></a>
+            <div class="right">
+              <a href="" class="right btn-small teal darken-2">Done</a>
+              <a href="" class="btn-small indigo lighten-1">Edit</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="indigo-text text-darken-2">
+            <i class="fa-solid fa-file-code indigo-text text-darken-2"></i>
+            <strong>{{ exercice.program_name}}</strong>
+          </div>
+        </li>
+        <li>
+          <div class="indigo-text text-darken-2">
+            {% if exercice.is_done == "no" %}
+              <i class="fa-solid fa-rectangle-list red-text text-lighten-3"></i>
+              <strong>NOT YET DONE</strong>
+            {% else %}
+              <i class="fa-solid fa-square-check teal-text text-lighten-2"></i>
+              <strong>DONE</strong>
+            {% endif %}
+          </div>
+        </li>
+      </ul>
+  </div>
   {% endfor %}
-</ul>
+
+<!-- TESTING AREA -->
+
+<!-- <div class="indigo-text text-darken-2">
+  <i class="fa-solid fa-dumbbell indigo-text text-darken-2"></i>
+  <a href="#" target="_blank"><strong>Test</strong></a>
+
+    <a href="" class="right btn-small teal darken-2">Done</a>
+    <a href="" class="right btn-small indigo lighten-1">Edit</a>
+</div> -->
 
 
-  <!-- {% for exercice in exercices %}
-    {{ exercice.exercice_name}} <br>
-    {{ exercice.program_name}} <br>
-    {{ exercice.exercice_link}} <br>
-    {{ exercice.due_date}} <br>
-  {% endfor %} -->
 {% endblock %}
-

@@ -97,8 +97,21 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/add_exercice")
+@app.route("/add_exercice", methods=["GET", "POST"])
 def add_exercice():
+    if request.method == "POST":
+        is_done = "no"
+        exercice = {
+            "program_name": request.form.get("program_name"),
+            "exercice_name": request.form.get("exercice_name"),
+            "exercice_link": request.form.get("exercice_link"),
+            "is_done": is_done,
+            "created_by": session["user"]
+        }
+        mongo.db.exercices.insert_one(exercice)
+        flash("Exercice Successfully Added")
+        return redirect(url_for("get_exercices"))
+        
     programs = mongo.db.programs.find().sort("program_name", 1)
     return render_template("add_exercice.html", programs=programs)
 

@@ -5,12 +5,13 @@
 
 
     <div class="row card-panel grey lighten-5">
-        <form class="col s12" method="POST" action="">
+        <form class="col s12" method="POST" action="{{ url_for('add_exercice') }}">
+            <!-- program_name -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fa-solid fa-file-code align-left prefix indigo-text text-darken-2"></i>
-                    <select id="program_name" name="program_name">
-                        <option value="name="program_name"" disabled selected>Program Name</option>
+                    <select id="program_name" name="program_name" required>
+                        <option value="" name="program_name" disabled selected>Program Name</option>
                         {% for program in programs %}
                         <option value="{{ program.program_name}}">{{ program.program_name}}</option>
                         {% endfor %}
@@ -18,18 +19,28 @@
                     <label for="program_name">Program</label>
                 </div>
             </div>
+            <!-- exercice_name -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-pencil-alt prefix indigo-text text-darken-2"></i>
-                    <input id="icon_prefix" type="text" class="validate" required>
+                    <input id="exercice_name" name="exercice_name" type="text" class="validate" required>
                     <label for="exercice_name">Exercice Name</label> 
                 </div>
             </div>
+            <!-- exercice_link -->
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fa solid fa-link align-left prefix indigo-text text-darken-2"></i>
                     <input id="exercice_link" name="exercice_link"  type="url" class="validate" required></input>
                     <label for="exercice_link">Exercice Link</label>
+                </div>
+                <!-- submit button -->
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <button type="submit" class="btn-large indigo darken-2">
+                            Add Exercice <i class="fas fa-plus-square right"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>
