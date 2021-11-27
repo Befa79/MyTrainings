@@ -4,35 +4,39 @@
   <h3 class="Indigo-text text-darken-2 center-align">Exercices</h3>
   {% for exercice in exercices %}
   <div class="row">
-      <ul class="col s8 offset-s2">
-        <li>
-          <div class="indigo-text text-darken-2">
-            <i class="fa-solid fa-dumbbell indigo-text text-darken-2"></i>
-            <a href="{{ exercice.exercice_link}}" target="_blank"><strong>{{ exercice.exercice_name}}</strong></a>
-            <div class="right">
-              <a href="" class="right btn-small teal darken-2">Done</a>
-              <a href="" class="btn-small indigo lighten-1">Edit</a>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="indigo-text text-darken-2">
-            <i class="fa-solid fa-file-code indigo-text text-darken-2"></i>
-            <strong>{{ exercice.program_name}}</strong>
-          </div>
-        </li>
-        <li>
-          <div class="indigo-text text-darken-2">
-            {% if exercice.is_done == "no" %}
-              <i class="fa-solid fa-rectangle-list red-text text-lighten-3"></i>
-              <strong>NOT YET DONE</strong>
-            {% else %}
-              <i class="fa-solid fa-square-check teal-text text-lighten-2"></i>
-              <strong>DONE</strong>
+    <ul class="col s8 offset-s2">
+      <li>
+        <div class="indigo-text text-darken-2">
+          <i class="fa-solid fa-dumbbell indigo-text text-darken-2"></i>
+          <a href="{{ exercice.exercice_link}}" target="_blank"><strong>{{ exercice.exercice_name}}</strong></a>
+          <div class="right">
+            {% if session.user|lower == exercice.created_by|lower %}
+            <a href="{{ url_for('delete_exercice', exercice_id=exercice._id) }}" 
+            class="btn-small green accent-4">Delete</a>            
+            <a href="{{ url_for('edit_exercice', exercice_id=exercice._id) }}"
+              class="btn-small indigo lighten-1">Edit</a>
             {% endif %}
           </div>
-        </li>
-      </ul>
+        </div>
+      </li>
+      <li>
+        <div class="indigo-text text-darken-2">
+          <i class="fa-solid fa-file-code indigo-text text-darken-2"></i>
+          <strong>{{ exercice.program_name}}</strong>
+        </div>
+      </li>
+      <li>
+        <div class="indigo-text text-darken-2">
+          {% if exercice.is_done == "no" %}
+          <i class="fa-solid fa-rectangle-list red-text text-lighten-3"></i>
+          <strong>NOT YET DONE</strong>
+          {% else %}
+          <i class="fa-solid fa-square-check teal-text text-lighten-2"></i>
+          <strong>DONE</strong>
+          {% endif %}
+        </div>
+      </li>
+    </ul>
   </div>
   {% endfor %}
 

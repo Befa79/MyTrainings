@@ -4,6 +4,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime, date
 if os.path.exists("env.py"):
     import env
 
@@ -99,13 +100,18 @@ def logout():
 
 @app.route("/add_exercice", methods=["GET", "POST"])
 def add_exercice():
+    now = datetime.now()
+    timestamp = datetime.timestamp(now)
     if request.method == "POST":
+        exercice_comment = ""
         is_done = "no"
         exercice = {
             "program_name": request.form.get("program_name"),
             "exercice_name": request.form.get("exercice_name"),
             "exercice_link": request.form.get("exercice_link"),
             "is_done": is_done,
+            "exercice_comment": exercice_comment,
+            "exercice_date_added": timestamp,
             "created_by": session["user"]
         }
         mongo.db.exercices.insert_one(exercice)
@@ -114,6 +120,33 @@ def add_exercice():
         
     programs = mongo.db.programs.find().sort("program_name", 1)
     return render_template("add_exercice.html", programs=programs)
+
+
+@app.route("/edit_exercice/<exercice_id>", methods=["GET", "POST"])
+def edit_exercice(exercice_id):
+    if request.method == "POST":
+        is_done = "yes" if request.form.get("is_done") else "no"
+        submit = {
+            "program_name": request.form.get("program_name"),
+            "exercice_name": request.form.get("exercice_name"),
+            "exercice_link": request.form.get("exercice_link"),
+            "is_done": is_done,
+            "exercice_comment": request.form.get("exercice_comment"),
+            "created_by": session["user"]
+        }
+        mongo.db.exercices.update({"_id": ObjectId(exercice_id)}, submit)
+        flash("Exercice Successfully Updated")
+
+    exercice = mongo.db.exercices.find_one({"_id": ObjectId(exercice_id)})
+    programs = mongo.db.programs.find().sort("program_name", 1)
+    return render_template("edit_exercice.html", exercice=exercice, programs=programs)
+
+
+@app.route("/delete_exercice/<exercice_id>")
+def delete_exercice(exercice_id):
+    mongo.db.exercices.remove({"_id": ObjectId(exercice_id)})
+    flash("Exercice Successfully Deleted")
+    return redirect(url_for("get_exercices"))
 
 
 if __name__ == "__main__":
