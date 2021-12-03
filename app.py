@@ -25,6 +25,13 @@ def get_exercices():
     return render_template("exercices.html", exercices=exercices)
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    exercices = list(mongo.db.exercices.find({"$text": {"$search": query}}))
+    return render_template("exercices.html", exercices=exercices)
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -147,6 +154,46 @@ def delete_exercice(exercice_id):
     mongo.db.exercices.remove({"_id": ObjectId(exercice_id)})
     flash("Exercice Successfully Deleted")
     return redirect(url_for("get_exercices"))
+
+
+@app.route("/get_programs")
+def get_programs():
+    programs = list(mongo.db.programs.find().sort("program_name", 1))
+    return render_template("programs.html", programs=programs)
+
+
+@app.route("/add_program", methods=["GET", "POST"])
+def add_program():
+    if request.method == "POST":
+        program = {
+            "program_name": request.form.get("program_name")
+        }
+        mongo.db.programs.insert_one(program)
+        flash("New Program Added")
+        return redirect("get_programs")
+
+    return render_template("add_program.html")
+
+
+@app.route("/edit_program/<program_id>", methods=["GET", "POST"])
+def edit_program(program_id):
+    if request.method == "POST":
+        submit = {
+            "program_name": request.form.get("program_name")
+        }
+        mongo.db.programs.update({"_id": ObjectId(program_id)}, submit)
+        flash("Program Successfully Updated")
+        return redirect(url_for("get_programs"))
+
+    program = mongo.db.programs.find_one({"_id": ObjectId(program_id)})
+    return render_template("edit_program.html", program=program)
+
+
+@app.route("/delete_program/<program_id>")
+def delete_program(program_id):
+    mongo.db.programs.remove({"_id": ObjectId(program_id)})
+    flash("Program Successfully Deleted")
+    return redirect(url_for("get_programs"))
 
 
 if __name__ == "__main__":
