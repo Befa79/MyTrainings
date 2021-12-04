@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Mandalore;
+    src: url("/assets/font/Mandalore-K77lD.otf") format("opentype");
+}
+
 .center-align{
     color: #303f9f;
 }
@@ -7,7 +12,32 @@ btn-small teal darken-2 {
     text-align: right;
 }
 
-/* #exercice_card{
-    margin: auto;
-    width: 80%;
-} */
+.card-content{
+    min-height: 10px;
+}
+
+.brand-logo{
+    margin-left: 15px;
+}
+
+#card-content{
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+#card-content{
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+h3, .brand-logo, .right.hide-on-med-and-down{
+    font-family: Mandalore;
+}
+
+.nav-wrapper{
+    font-size: 80% !important;
+}
+
+body > header > nav > div > ul{
+    font-size: 3em !important;
+}

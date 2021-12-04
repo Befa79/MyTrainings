@@ -143,6 +143,7 @@ def edit_exercice(exercice_id):
         }
         mongo.db.exercices.update({"_id": ObjectId(exercice_id)}, submit)
         flash("Exercice Successfully Updated")
+        return redirect(url_for("get_exercices"))
 
     exercice = mongo.db.exercices.find_one({"_id": ObjectId(exercice_id)})
     programs = mongo.db.programs.find().sort("program_name", 1)
