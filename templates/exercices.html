@@ -3,16 +3,19 @@
 
   <h3 class="Indigo-text text-darken-2 center-align">Exercices</h3>
 
+  <!-- testing -->
+
+<!-- Search section -->
   <div class="row">
     <div class="col s12 m12">
       <div class="card indigo lighten-5">
-        <div id="card-content" class="card-content">
+        <div class="card-content" id="card-content">
           <form action="{{ url_for('search') }}" method="post">
             <div class="row valign-wrapper center-align">
               <div class="input-field col s12 m8">
                 <i class="fas fa-search prefix"></i>
                 <input type="text" name="query" id="query" minlength="3" class="validate" required>
-                <label for="query">Search Exercices</label>
+                <label for="query">Search</label>
               </div>
               <div class="col s12 m6">
                 <a href="{{ url_for('get_exercices') }}" class="red accent-4 btn text-shadow">Reset</a>
@@ -29,25 +32,7 @@
   </div>
 
 
-<!-- Search section -->
 
-  <!-- <div class="row card-panel grey lighten-5">
-    <form action="{{ url_for('search') }}" method="post" class="col s12">
-        <div class="row valign-wrapper center-align">
-            <div class="input-field col s12 m8">
-                <i class="fas fa-search prefix indogo text-darken-2"></i>
-                <input type="text" name="query" id="query" minlength="3" class="validate" required>
-                <label for="query">Search Exercices</label>
-            </div>
-            <div class="col s12 m6">
-                <a href="{{ url_for('get_exercices') }}" class="red btn text-shadow">Reset</a>
-                <button type="submit" class="light-blue darken-1 btn text-shadow">
-                    <i class="fas fa-search left"></i> Search
-                </button>
-            </div>
-        </div>
-    </form>
-</div> -->
 
 
 <!-- exercices part -->
@@ -58,7 +43,7 @@
     <div class="col s12 m6">
       <div class="card indigo lighten-5">
         <div class="card-content indigo-text text-darken-2">
-          <span class="card-title">{{ exercice.exercice_name }}</span>
+          <span class="card-title" id="card">{{ exercice.exercice_name }}</span>
           <div class="right">
             {% if session.user|lower == exercice.created_by|lower %}
             <a href="{{ url_for('delete_exercice', exercice_id=exercice._id) }}"

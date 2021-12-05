@@ -41,3 +41,7 @@ h3, .brand-logo, .right.hide-on-med-and-down{
 body > header > nav > div > ul{
     font-size: 3em !important;
 }
+
+#card{
+    min-height: 65px !important;
+}
