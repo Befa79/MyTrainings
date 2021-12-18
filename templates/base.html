@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    <link rel="shortcut icon" type="image/png" href="/static/images/favicon.png">
     {% block styles %}
     {% endblock %}
     <title>Training Manager</title>
@@ -17,7 +18,7 @@
         <!-- top navbar -->
         <nav class="nav-extended indigo darken-2">
             <div class="nav-wrapper">
-                <a href="{{ url_for('get_exercices') }}" class="brand-logo">MyRoutine</a>
+                <a href="{{ url_for('get_exercices') }}" class="brand-logo"><img src="/static/images/LogoMakr.png" alt="logo" id="logo"></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
 				<ul class="right hide-on-med-and-down" id="menu" >
 					<li><a href="{{ url_for('get_exercices') }}">Home</a></li>
@@ -26,6 +27,7 @@
                         <li><a href="{{ url_for('add_exercice') }}">New</a></li>
                         <li><a href="{{ url_for('get_programs') }}">Programs</a></li>
                         <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                        <li><a href="{{ url_for('get_links') }}">Links</a></li>
                     {% else %}
                         <li><a href="{{ url_for('login') }}">Log In</a></li>
                         <li><a href="{{ url_for('register') }}">Register</a></li>
@@ -44,6 +46,7 @@
             <li><a href="{{ url_for('add_exercice') }}">New</a></li>
             <li><a href="{{ url_for('get_programs') }}">Programs</a></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+            <li><a href="{{ url_for('get_links') }}">Links</a></li>
             {% else %}
             <li><a href="{{ url_for('login') }}">Log In</a></li>
             <li><a href="{{ url_for('register') }}">Register</a></li>

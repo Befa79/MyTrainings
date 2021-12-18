@@ -34,8 +34,8 @@ h3, .brand-logo, .right.hide-on-med-and-down{
     font-family: Mandalore;
 }
 
-.nav-wrapper{
-    font-size: 80% !important;
+body > header > nav > div{
+    height: 500px;
 }
 
 #card{
@@ -43,5 +43,11 @@ h3, .brand-logo, .right.hide-on-med-and-down{
 }
 
 #menu > li:nth-child(1) > a, #menu > li:nth-child(2) > a, #menu > li:nth-child(3) > a, #menu > li:nth-child(4) > a, #menu > li:nth-child(5) > a, #menu > li:nth-child(6) > a{
-    font-size: 1.8em;
+    font-size: 1.6em;
 }
+
+#logo{
+    width: 220px;
+    filter: invert(100%);
+} 
+

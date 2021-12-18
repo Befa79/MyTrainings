@@ -197,6 +197,34 @@ def delete_program(program_id):
     return redirect(url_for("get_programs"))
 
 
+@app.route("/get_links")
+def get_links():
+    links = list(mongo.db.links.find().sort("link_name", 1))
+    return render_template("links.html", links=links)
+
+
+@app.route("/add_link", methods=["GET", "POST"])
+def add_link():
+    if request.method == "POST":
+        link = {
+            "link_name": request.form.get("link_name"),
+            "link_description": request.form.get("link_description"),
+            "link_url": request.form.get("link_url")
+        }
+        mongo.db.links.insert_one(link)
+        flash("New link Added")
+        return redirect("get_links")
+
+    return render_template("add_link.html")
+
+
+@app.route("/delete_link/<link_id>")
+def delete_link(link_id):
+    mongo.db.links.remove({"_id": ObjectId(link_id)})
+    flash("Link Successfully Deleted")
+    return redirect(url_for("get_links"))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

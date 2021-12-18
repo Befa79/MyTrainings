@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row center-align">
+    <h3 class="indigo-text text-darken-2">
+        Links
+        <a href="{{ url_for('add_link') }}"<i class="fas fa-plus-circle indigo-text text-darken-2"></i></a>
+    </h3>
+</div>
+
+
+<div class="row">
+    <div class="col s12 m8 offset-m2">
+        <div class="collection">
+            <table class="collection-item indigo-text text-darken-2 centered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                {% for link in links %}
+                <tbody>
+                    <tr>
+                        <td><a href="{{ link.link_url }}" target="blank">{{ link.link_name }}</a></td>
+                        <td>{{ link.link_description }}</td>
+                        <td><a href="{{ url_for('delete_link', link_id=link._id) }}" class="btn-floating btn-small red accent-1"><i class="fas fa-minus"></i></a></td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
